@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1697902014242,
+      "tag": "0000_lovely_kang",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1697902047665,
+      "tag": "0001_cooing_eternals",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1697974183152,
+      "tag": "0002_superb_lily_hollister",
+      "breakpoints": true
+    }
+  ]
+}
