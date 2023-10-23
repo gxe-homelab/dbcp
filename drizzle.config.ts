@@ -1,8 +1,8 @@
 import type { Config } from 'drizzle-kit';
 import 'dotenv/config';
 
-const DEV = process.env.NODE_ENV! == 'developement';
-const DATABASE_URL = process.env[DEV ? 'DEV' : 'PROD' + '_DATABASE_URL']!;
+const DEV = process.env.NODE_ENV! == 'development';
+const DATABASE_URL = !DEV ? process.env.PROD_DATABASE_URL! : process.env.DEV_DATABASE_URL!;
 
 export default {
 	schema: './src/db/schema/*',
@@ -12,5 +12,5 @@ export default {
 		connectionString: DATABASE_URL
 	},
 	verbose: true,
-	strict: !DEV
+	strict: true
 } satisfies Config;

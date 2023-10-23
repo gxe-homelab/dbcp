@@ -1,8 +1,8 @@
-import { db } from '../db/index';
+import { db } from '../../../db/index';
 import { fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
-import { users } from '../db/schema/user';
-import { databases } from '../db/schema/database';
+import { users } from '../../../db/schema/user';
+import { databases } from '../../../db/schema/database';
 
 export const load = (async () => {
 	return {

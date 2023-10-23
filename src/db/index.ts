@@ -1,25 +1,40 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { migrate } from 'drizzle-orm/postgres-js/migrator';
-import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { migrate } from 'drizzle-orm/node-postgres/migrator';
+import { Pool } from 'pg';
 import { users } from './schema/user';
 import { databases } from './schema/database';
 import { building, dev } from '$app/environment';
 import { DEV_DATABASE_URL, PROD_DATABASE_URL } from '$env/static/private';
+import { admins } from './schema/admins';
 
 const DATABASE_URL = dev ? DEV_DATABASE_URL : PROD_DATABASE_URL;
 
-if (building) {
-	const migrationClient = postgres(DATABASE_URL, { max: 1 });
-	const migrationDb = drizzle(migrationClient);
+const pool = new Pool({
+	connectionString: DATABASE_URL,
+	max: 2
+});
 
-	await migrate(migrationDb, { migrationsFolder: 'drizzle' });
+try {
+	if (building) {
+		const migrationDb = drizzle(pool, {
+			schema: {
+				users,
+				databases,
+				admins
+			}
+		});
+
+		await migrate(migrationDb, { migrationsFolder: 'drizzle' });
+	}
+} catch (error) {
+	console.log(error);
 }
 
 // for query purposes
-const queryClient = postgres(DATABASE_URL);
-export const db = drizzle(queryClient, {
+export const db = drizzle(pool, {
 	schema: {
 		users,
-		databases
+		databases,
+		admins
 	}
 });

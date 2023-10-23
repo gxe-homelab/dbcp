@@ -4,19 +4,18 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			user: User | undefined;
+		}
 		// interface PageData {}
 		// interface Platform {}
 	}
+}
 
-	namespace NodeJS {
-		interface ProcessEnv {
-			PORT: string;
-
-			readonly DEV_DATABASE_URL: string;
-			readonly PROD_DATABASE_URL: string;
-		}
-	}
+interface User {
+	id: number;
+	username: string;
+	exp: number;
 }
 
 export {};

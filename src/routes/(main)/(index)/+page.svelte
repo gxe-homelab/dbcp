@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { PageData } from '../$types';
 	import { enhance } from '$app/forms';
 
 	export let data: PageData;
@@ -7,7 +7,7 @@
 	let { databases, users } = data;
 </script>
 
-<div class="border p-5 flex flex-col gap-3">
+<div class="border flex flex-col gap-3">
 	<h1 class="font-semibold text-lg">Database</h1>
 
 	<form
